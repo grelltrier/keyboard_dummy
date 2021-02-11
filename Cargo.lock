@@ -495,7 +495,7 @@ dependencies = [
 [[package]]
 name = "knn_dtw"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/kNN#632a156ad1b362e52f31ab85c2b9c0ff3a154962"
+source = "git+https://github.com/grelltrier/knn_dtw#a98ce663b56bc8e092504d40cee1c0c66110664f"
 dependencies = [
  "dtw",
  "dtw_cost",
