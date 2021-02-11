@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Add architecture
-        run: sudo dpkg --add-architecture aarch64
+        run: sudo dpkg --add-architecture arm64
       - name: Update cache
         run: sudo apt-get update
       - name: Add gcc for target
