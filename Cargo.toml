@@ -1,0 +1,18 @@
+[package]
+name = "keyboard_dummy"
+version = "0.1.0"
+authors = ["pentamassiv <pentamassiv@posteo.de>"]
+edition = "2018"
+
+[dependencies]
+glib = "0.10"
+gdk = "0.13"
+gdk-pixbuf = "0.9"
+gtk = "0.9"
+gtk-test = "0.6"
+relm = "0.20"
+relm-derive = "0.20"
+cairo-rs = "0.9"
+path_gen = {git = "https://github.com/grelltrier/path_gen"}
+dtw = { git = "https://github.com/grelltrier/dtw"}
+knn_dtw = {git = "https://github.com/grelltrier/kNN"}
