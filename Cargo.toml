@@ -15,4 +15,4 @@ relm-derive = "0.20"
 cairo-rs = "0.9"
 path_gen = {git = "https://github.com/grelltrier/path_gen"}
 dtw = { git = "https://github.com/grelltrier/dtw"}
-knn_dtw = {git = "https://github.com/grelltrier/kNN"}
+knn_dtw = {git = "https://github.com/grelltrier/knn_dtw"}
