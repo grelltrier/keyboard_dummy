@@ -19,7 +19,7 @@ jobs:
       - name: Search GTK3 libraries
         run: sudo apt-cache search libgtk-3-dev
       - name: Add GTK3 libraries
-        run: sudo apt-get install -y libgtk-3-dev:arm64
+        run: sudo apt-get install -y libgtk-3-dev
       - name: Add pkg-config
         run: sudo apt-get install pkg-config
       - name: Export environment variable
