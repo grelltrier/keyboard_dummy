@@ -317,7 +317,7 @@ impl Win {
             dist = dtw::ucr_improved::dtw(
                 &candidate_word_path,
                 query,
-                &cb,
+                Some(&cb),
                 n_longer_seq - 1,
                 bsf,
                 &dist_points,
