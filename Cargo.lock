@@ -107,12 +107,12 @@ dependencies = [
 [[package]]
 name = "dtw"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/dtw#e37f218c95e9abbe2830f248817aeb78d97e40cd"
+source = "git+https://github.com/grelltrier/dtw#54335b5ebcd62cf589441bd722aeee002e8afc3c"
 
 [[package]]
 name = "dtw_cost"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/dtw_cost#69df8826bb53819e442cf3a137bda75f78048b1e"
+source = "git+https://github.com/grelltrier/dtw_cost#54949a2aa945b27414ed20a49408b35455a9c034"
 
 [[package]]
 name = "either"
@@ -495,7 +495,7 @@ dependencies = [
 [[package]]
 name = "knn_dtw"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/knn_dtw#a4cc1b91a66f29b87fee095004428c5bc8af5e08"
+source = "git+https://github.com/grelltrier/knn_dtw#128b29d734653178f55a2e76c2b1684732ad222d"
 dependencies = [
  "dtw",
  "dtw_cost",
@@ -582,7 +582,7 @@ dependencies = [
 [[package]]
 name = "path_gen"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/path_gen#3ee360309bfd7b13b1e73212e59f4ce0615bc88f"
+source = "git+https://github.com/grelltrier/path_gen#69a092a80ee901448bf87ea4bc0418334e29a5f3"
 
 [[package]]
 name = "pin-project-lite"
@@ -685,9 +685,9 @@ dependencies = [
 
 [[package]]
 name = "relm"
-version = "0.20.0"
+version = "0.21.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6814cb3502d3edb83435a777c27bee4fcce4613a36884a2a1b7ee36df9f1978a"
+checksum = "9146725e1241fb01e2b2dab85e43859d770c527d95e56451a30abda65d189e2c"
 dependencies = [
  "cairo-rs",
  "glib",
@@ -702,14 +702,14 @@ dependencies = [
 
 [[package]]
 name = "relm-derive"
-version = "0.20.0"
+version = "0.21.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cd3820afe557690469806fa09d5bca7cc13db66358eea330fa7db9bc8baf5827"
+checksum = "f8dfad01c044fc443386089bc153b4586199e96ac4d3749f0a85ec3aec88a069"
 dependencies = [
  "lazy_static",
- "proc-macro2 0.4.30",
- "quote 0.6.13",
- "syn 0.15.44",
+ "proc-macro2 1.0.24",
+ "quote 1.0.9",
+ "syn 1.0.60",
 ]
 
 [[package]]
