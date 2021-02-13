@@ -1,4 +1,5 @@
 [![dependency status](https://deps.rs/repo/github/grelltrier/keyboard_dummy/status.svg)](https://deps.rs/repo/github/grelltrier/keyboard_dummy)
+![Build](https://github.com/grelltrier/keyboard_dummy/workflows/Build/badge.svg)
 
 # Keyboard_dummy
 
