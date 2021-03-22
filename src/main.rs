@@ -2,6 +2,7 @@ use gtk::{
     ButtonExt, ContainerExt, EntryExt, GestureDragExt, GtkWindowExt, Inhibit, LabelExt, OverlayExt,
     WidgetExt, Window,
 };
+use path_gen::WordPath;
 use relm::{connect, Relm, Update, Widget};
 use relm_derive::Msg;
 use std::collections::{HashMap, HashSet};
@@ -19,7 +20,7 @@ struct Model {
     path: Vec<(f64, f64)>,
     path_rel: Vec<(f64, f64)>,
     words: HashSet<String>,
-    word_paths: HashMap<String, Vec<(f64, f64)>>,
+    key_layout: HashMap<String, (f64, f64)>,
 }
 
 #[derive(Msg)]
@@ -65,15 +66,13 @@ impl Update for Win {
         let path = Vec::new();
         let path_rel = Vec::new();
         let words = get_word_list("word_list.txt");
-        let mut word_paths = HashMap::new();
-        for word in &words {
-            word_paths.insert(word.clone(), path_gen::get_path(&word));
-        }
+        let key_layout = path_gen::get_default_buttons_centers();
+
         Model {
             path,
             path_rel,
             words,
-            word_paths,
+            key_layout,
         }
     }
 
@@ -269,7 +268,7 @@ impl Win {
         // Calculate the relative coordinates
         let x_rel = x / width as f64;
         let y_rel = y / height as f64;
-        (x_rel, y_rel)
+        (x_rel, y_rel * 0.4) // Foctor to not weigh the y coordinate more than x
     }
 
     /// Erases the path/gesture the user drew
@@ -299,40 +298,73 @@ impl Win {
     }
 
     fn find_similar_words(&self) {
+        let query_path = &self.model.path_rel;
+        let mut dtw_dist;
         let k = 7;
-        let query = &self.model.path_rel;
-        let mut dist;
         let mut k_best: Vec<(String, f64)> = vec![(String::new(), f64::INFINITY); k]; // Stores the k nearest neighbors (location, DTW distance)
         let mut bsf = k_best[k - 1].1;
 
-        // Compare the paths of each word
-        for (candidate_word, candidate_word_path) in &self.model.word_paths {
-            // The cb currently needs to have the same length as the longer sequence for dtw not to panic
-            let n_longer_seq = if query.len() < candidate_word_path.len() {
-                candidate_word_path.len()
-            } else {
-                query.len()
-            };
-            let cb = vec![0.0; n_longer_seq];
-            dist = dtw::ucr_improved::dtw(
-                &candidate_word_path,
-                query,
-                Some(&cb),
-                n_longer_seq - 1,
-                bsf,
-                &dist_points,
-            );
-            if candidate_word == "hello" {
-                println!("Path for hello:");
-                for (x, y) in candidate_word_path {
-                    print!("({:.3}/{:.3})", x, y);
+        let w = (query_path.len() as f64 * 0.1).round() as usize;
+
+        // In order to better compare the drawn path with the ideal path, we want them to have a similar density of points
+        // To generate ideal paths with a similar density, we calculate the density of the drawn path
+        let desired_point_density = {
+            let mut drawn_path_length = 0.0;
+            let mut drawn_path_iter = query_path.iter().peekable();
+            let mut leg_dist;
+            // Calculate the length of the drawn path
+            while let Some(start_point) = drawn_path_iter.next() {
+                if let Some(&end_point) = drawn_path_iter.peek() {
+                    leg_dist = dist_points(start_point, end_point);
+                    drawn_path_length += leg_dist;
                 }
-                println!();
+            }
+            drawn_path_length / query_path.len() as f64
+        };
+
+        let mut candidate_path;
+        let mut word_path;
+        // Compare the paths of each word
+        for candidate_word in &self.model.words {
+            word_path = WordPath::new(&self.model.key_layout, &candidate_word);
+
+            let (candidate_first, candidate_last) = word_path.get_first_last_points();
+
+            // Use lower bound of Kim to skip impossible candidates
+            if let Some(candidate_first) = candidate_first {
+                let candidate_last = if let Some(candidate_last) = candidate_last {
+                    candidate_last
+                } else {
+                    candidate_first
+                };
+
+                let mut dist = dist_points(candidate_first, &query_path[0]);
+                dist += dist_points(candidate_last, &query_path[query_path.len() - 1]);
+
+                if dist > bsf {
+                    continue;
+                }
+            } else {
+                // The candidate word is an empty string
+                continue;
             }
 
-            if dist < bsf {
+            // The candidate counld not be skipped so the full path is generated
+            candidate_path = if let Some(candidate_path) = word_path.get_path(desired_point_density)
+            {
+                candidate_path
+            } else {
+                continue;
+            };
+
+            // Calculate the similarity
+            dtw_dist =
+                dtw::ucr_improved::dtw(&candidate_path, &query_path, None, w, bsf, &dist_points);
+
+            // If the candidate is a better match, save it
+            if dtw_dist < bsf {
                 let candidate: String = candidate_word.to_owned();
-                knn_dtw::ucr::insert_into_k_bsf((candidate, dist), &mut k_best);
+                knn_dtw::ucr::insert_into_k_bsf((candidate, dtw_dist), &mut k_best);
                 bsf = k_best[k - 1].1;
             }
         }
@@ -353,7 +385,7 @@ impl Win {
 
         println!("Print path for word \"{}\"", k_best[0].0);
         println!("The word had a distance of {}", k_best[0].1);
-        let path_best_match = self.model.word_paths.get(&k_best[0].0);
+        /*let path_best_match = self.model.word_paths.get(&k_best[0].0);
         if let Some(word_path) = path_best_match {
             println!("Best matching path:");
             for (x, y) in word_path {
@@ -361,7 +393,7 @@ impl Win {
             }
         } else {
             println!("No best path was found!!");
-        }
+        }*/
     }
 }
 
