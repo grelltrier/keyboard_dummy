@@ -364,7 +364,7 @@ impl Win {
             // If the candidate is a better match, save it
             if dtw_dist < bsf {
                 let candidate: String = candidate_word.to_owned();
-                knn_dtw::ucr::insert_into_k_bsf((candidate, dtw_dist), &mut k_best);
+                knn_dtw::insert_into_k_bsf((candidate, dtw_dist), &mut k_best);
                 bsf = k_best[k - 1].1;
             }
         }
