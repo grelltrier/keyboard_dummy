@@ -385,15 +385,6 @@ impl Win {
 
         println!("Print path for word \"{}\"", k_best[0].0);
         println!("The word had a distance of {}", k_best[0].1);
-        /*let path_best_match = self.model.word_paths.get(&k_best[0].0);
-        if let Some(word_path) = path_best_match {
-            println!("Best matching path:");
-            for (x, y) in word_path {
-                print!("({:.3}/{:.3})", x, y);
-            }
-        } else {
-            println!("No best path was found!!");
-        }*/
     }
 }
 
