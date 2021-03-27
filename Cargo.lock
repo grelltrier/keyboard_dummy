@@ -2,9 +2,9 @@
 # It is not intended for manual editing.
 [[package]]
 name = "anyhow"
-version = "1.0.39"
+version = "1.0.40"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "81cddc5f91628367664cc7c69714ff08deee8a3efc54623011c772544d7b2767"
+checksum = "28b2cd92db5cbd74e8e5028f7e27dd7aa3090e89e4f2a197cc7c8dfb69c7063b"
 
 [[package]]
 name = "atk"
@@ -107,12 +107,12 @@ dependencies = [
 [[package]]
 name = "dtw"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/dtw#5189d1c8965fa5be7a99772d6a75bc68e2b8dec8"
+source = "git+https://github.com/grelltrier/dtw#267b6c5e3dbba60ff613c5a9e0b3780a7f8a619a"
 
 [[package]]
 name = "dtw_cost"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/dtw_cost#4eb1439061a07dd2054020e6385ccfc67c2728fd"
+source = "git+https://github.com/grelltrier/dtw_cost#900de2444e77336ac40b42263757b812e68a0ae2"
 
 [[package]]
 name = "either"
@@ -206,7 +206,7 @@ dependencies = [
  "proc-macro-hack",
  "proc-macro2 1.0.24",
  "quote 1.0.9",
- "syn 1.0.64",
+ "syn 1.0.65",
 ]
 
 [[package]]
@@ -372,7 +372,7 @@ dependencies = [
  "proc-macro-error",
  "proc-macro2 1.0.24",
  "quote 1.0.9",
- "syn 1.0.64",
+ "syn 1.0.65",
 ]
 
 [[package]]
@@ -492,7 +492,7 @@ dependencies = [
 [[package]]
 name = "knn_dtw"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/knn_dtw#6dc4a2477df0876ba6beeab10a12170477004275"
+source = "git+https://github.com/grelltrier/knn_dtw#a8a24b59bd8e15b992f04b00b60423ff0547ca3b"
 dependencies = [
  "dtw",
  "dtw_cost",
@@ -579,7 +579,7 @@ dependencies = [
 [[package]]
 name = "path_gen"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/path_gen#724aa9153090222c4d3a32f09006a323c84c7826"
+source = "git+https://github.com/grelltrier/path_gen#232dcefdc4e1f24885eb4e65ccf31a0cfccb8e42"
 
 [[package]]
 name = "pin-project-lite"
@@ -617,7 +617,7 @@ dependencies = [
  "proc-macro-error-attr",
  "proc-macro2 1.0.24",
  "quote 1.0.9",
- "syn 1.0.64",
+ "syn 1.0.65",
  "version_check",
 ]
 
@@ -706,7 +706,7 @@ dependencies = [
  "lazy_static",
  "proc-macro2 1.0.24",
  "quote 1.0.9",
- "syn 1.0.64",
+ "syn 1.0.65",
 ]
 
 [[package]]
@@ -736,7 +736,7 @@ dependencies = [
  "heck",
  "proc-macro2 1.0.24",
  "quote 1.0.9",
- "syn 1.0.64",
+ "syn 1.0.65",
 ]
 
 [[package]]
@@ -752,9 +752,9 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "1.0.64"
+version = "1.0.65"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3fd9d1e9976102a03c542daa2eff1b43f9d72306342f3f8b3ed5fb8908195d6f"
+checksum = "f3a1d708c221c5a612956ef9f75b37e454e88d1f7b899fbd3a18d4252012d663"
 dependencies = [
  "proc-macro2 1.0.24",
  "quote 1.0.9",
@@ -793,7 +793,7 @@ checksum = "7765189610d8241a44529806d6fd1f2e0a08734313a35d5b3a556f92b381f3c0"
 dependencies = [
  "proc-macro2 1.0.24",
  "quote 1.0.9",
- "syn 1.0.64",
+ "syn 1.0.65",
 ]
 
 [[package]]
